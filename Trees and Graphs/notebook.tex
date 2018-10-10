@@ -1,0 +1,649 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Tree and binary tree 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Tree}\label{tree}
+
+    \subsubsection{1.
+树的基本概念}\label{ux6811ux7684ux57faux672cux6982ux5ff5}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    结点的度：一个结点的子树数目称为该结点的度。（例如结点1的结点的度为3，结点2的结点的度为3，结点3的结点的度为0）。
+
+树的度：所有结点度当中，度最高的一个。（上图树的度是3）。
+
+叶子结点：上图应该是：3、5、6、7、9、10
+
+分之结点：除了叶子结点，其他的都称为分之结点，和叶子结点构成互补的关系。（1、2、4、8）
+
+内部结点：分之结点除了根结点以外的。（2、4、8）
+
+父结点：如5号结点就是2号结点的子结点。
+
+子结点：2号结点是5号结点的父结点。
+
+兄弟结点：5、6、7称为兄弟结点，出自同一个父亲2号结点。
+
+这三个概念是一个相对的概念。
+
+层次：0层、1层、2层、3层。
+
+还有一个公式就能做题了：总结点=所有度结点的和+1（应该是父结点）
+
+    \subsubsection{2. 树的遍历：}\label{ux6811ux7684ux904dux5386}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+\textbf{前序遍历}：先从根部出发，然后由左向右，一颗一颗树来完成遍历。先访问根再访问叶子结点，这就是我画出来的前序遍历图，箭头的方向表示遍历的顺序。a为起点
+
+结果是：1、2、5、6、7、3、4、8、9、10
+
+    \textbf{后序遍历}：顾名思义，就是从叶子结点出发，先遍历叶子结点再到根结点，最后到父结点。我画出顺序可能会更直观点。
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+结果是：5、6、7、2、3、9、10、8、4、1
+
+    \textbf{层次遍历}：按0层、1层、2层、3层，从左到右来遍历
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+结果是：1、2、3、4、5、6、7、8、9、10
+
+    \section{Binary Tree}\label{binary-tree}
+
+    \subsubsection{1.
+二叉树的一些概念和特性}\label{ux4e8cux53c9ux6811ux7684ux4e00ux4e9bux6982ux5ff5ux548cux7279ux6027}
+
+    二叉树并不是一种特殊的树，而是一种独立的一种数据结构。
+
+满二叉树：所有结点都是充实的，没有空缺的结点。
+
+完全二叉树：假设该二叉树为K层，则（K-1）层为满，且叶子结点，全部集中在左侧。
+
+非完全二叉树：即普通二叉树
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \textbf{二叉树的重要特性}：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  在二叉树的第K层上，最多有2的K-1次方（K\textgreater{}=1）
+\item
+  深度为K的二叉树，最多有2的K次方减1个结点（K\textgreater{}=1）
+\item
+  对于任何一棵二叉树，如果其叶子结点的个数为K，度为2的结点数为M,则K=M+1
+\item
+  如果对于一棵有N个结点的完全二叉树的结点按层次进行编号（如上图，从第一层到第
+  （log 2n 向下取整），每层从左到右），对任意结点 i （11,则父结点为 i/2
+  向下取整
+
+  如果2i\textgreater{}n,则结点i为叶子结点，无左子结点，否则，其左子结点为2i
+
+  如果2i+1\textgreater{}n，则结点i无右子结点，否则，其右子结点是结点2i+1
+\end{enumerate}
+
+    \textbf{小测验}
+
+\begin{verbatim}
+  例：一个具有767个结点的完全二叉树，其叶子结点的个数为 （384）
+
+  解题:假设度为0的结点数为n0,度为1的结点数为n1,度为2的结点数为n2 ,
+
+  则n0+n1+n2=767,
+
+  768=2*n0+n1,度为1的个数为 0 或 1  ，
+
+  所以个数为384
+\end{verbatim}
+
+    \subsubsection{2.
+二叉树的遍历}\label{ux4e8cux53c9ux6811ux7684ux904dux5386}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \textbf{前序遍历
+遍历的结果是：1、2、4、5、7、8、3、6。从根结点分两部分，先把左边的遍历完，都是从左到右的。}
+
+1、访问根节点
+
+2、前序遍历左子树
+
+3、前序遍历右子树
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \textbf{中序遍历：结果是：4,2,7,8,5,1,3,6。} ???没看懂
+
+（1）中序遍历左子树 （2）访问根结点 （3）中序遍历右子树
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \textbf{后序遍历：结果是：4、8、7、5、2、6、3、1}
+
+1、后序遍历左子树
+
+2、后序遍历右子树
+
+3、访问根节点
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \textbf{层次遍历：结果是：1、2、3、4、5、6、7、8}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \subsubsection{3.
+树和二叉树的转换}\label{ux6811ux548cux4e8cux53c9ux6811ux7684ux8f6cux6362}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+原则：
+\textbf{树的左孩子结点作为二叉树的左子树结点，兄弟结点作为二叉树的右子节点}
+
+    在这个图里边，2是根结点的左子树结点，与2并列的3、4是2的兄弟结点，故转换成二叉树时，作为2的右子节点，类似的，5是3的左子树结点，故也是二叉树里3的左结点，6、7与5并列，就作为5的右子节点，类似的，4号结点也是一样，我们看图：
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    我们按照这句话，就能轻而易举的画出个大概了，然后我们把黑色的线抹去就行了。抹去之后，就成这样了：
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \subsubsection{3.查找树（二叉排序树）Binary Search
+Tree}\label{ux67e5ux627eux6811ux4e8cux53c9ux6392ux5e8fux6811binary-search-tree}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+a.查找树的左、右子树各是一颗查找树。这个很明了，无可厚非。
+
+b.若查找树的左子树非空，则其左子树上的各节点均小于根结点的值。如图：2和4都小于5。
+
+c.若查找树的右子树非空，则其右子树上的各节点值均大于根节点的值。如图：6和8都大于5。
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+查找结点：根据传入的Key值进行对比，如果小于该结点，则与其左子结点比较，如果大于该结点，则与其右结点比较。以此类推
+
+插入结点：
+
+\begin{verbatim}
+1.如果相同键值的结点已在查找二叉树中，则不进行插入
+
+2.如果该查找二叉树为空树，则以该新结点为查找二叉树
+
+3.将要插入的结点的键值与插入后的父结点的键值比较，就能确定新结点是父结点的左子结点，还是右子结点，并进行相应插入
+
+举个例子，插入29：从上面的图，我们一眼就看的出来，29必须要跟着20了，因为56的右结点要比56要大，所以不可能，那么112的左结点呢？更不可能了，因为112的所有子结点都要比根节点89要大，所以非常easy吧。只能作为20的右子结点了。
+\end{verbatim}
+
+删除结点：
+
+\begin{verbatim}
+1.若待删除结点P是叶子结点，则直接删除该结点
+
+2.若待删除的结点P只有一个叶子结点，则将该结点直接删除，将该结点的子结点，与待删除结点的父结点相连
+
+3.若待删除的结点P有左右两个子结点，则在其左子树上，用中序遍历查找关键值最大的结点S，用结点S代替结点P，再将结点P删除。结点S必定属于以上2中情况
+\end{verbatim}
+
+    \section{Coding}\label{coding}
+
+    \textbf{Problem: 实现以下二叉树，并进行先序遍历、中序遍历和后序遍历。}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{class} \PY{n+nc}{BinaryTreeNode}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{data}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left} \PY{o}{=} \PY{n}{left}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right} \PY{o}{=} \PY{n}{right}
+                 
+         \PY{k}{class} \PY{n+nc}{BinaryTree}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{root}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root} \PY{o}{=} \PY{n}{root}
+         
+             \PY{k}{def} \PY{n+nf}{is\PYZus{}empty}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root} \PY{o}{==} \PY{k+kc}{None}
+         
+             \PY{k}{def} \PY{n+nf}{preOrder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{BinaryTreeNode}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{BinaryTreeNode} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return}
+                 \PY{c+c1}{\PYZsh{} 先打印根结点，再打印左结点，后打印右结点}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{preOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{left}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{preOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{right}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{inOrder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{BinaryTreeNode}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{BinaryTreeNode} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return}
+                 \PY{c+c1}{\PYZsh{} 先打印左结点，再打印根结点，后打印右结点}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{left}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{right}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{postOrder}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{BinaryTreeNode}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{BinaryTreeNode} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return}
+                 \PY{c+c1}{\PYZsh{} 先打印左结点，再打印右结点，后打印根结点}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{left}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postOrder}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{right}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{BinaryTreeNode}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{}\PYZsh{} 15 层次遍历}
+             \PY{k}{def} \PY{n+nf}{lookup}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{BinaryTreeNode}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{stack} \PY{o}{=} \PY{p}{[}\PY{n}{BinaryTreeNode}\PY{p}{]}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{stack}\PY{p}{)}
+                 \PY{k}{while} \PY{n}{stack}\PY{p}{:}
+                     \PY{n}{current} \PY{o}{=} \PY{n}{stack}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{current}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{current}\PY{o}{.}\PY{n}{left}\PY{p}{:}
+                         \PY{n}{stack}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{current}\PY{o}{.}\PY{n}{left}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{current}\PY{o}{.}\PY{n}{right}\PY{p}{:}
+                         \PY{n}{stack}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{current}\PY{o}{.}\PY{n}{right}\PY{p}{)}
+         
+         
+                 
+         \PY{n}{n1} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{n2} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{n3} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{n4} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{n}{n1}\PY{p}{,} \PY{n}{right}\PY{o}{=}\PY{n}{n2}\PY{p}{)}
+         \PY{n}{n5} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{left}\PY{o}{=}\PY{n}{n3}\PY{p}{)}
+         \PY{n}{root} \PY{o}{=} \PY{n}{BinaryTreeNode}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{left} \PY{o}{=} \PY{n}{n4}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{n}{n5}\PY{p}{)}
+         
+         \PY{n}{bt} \PY{o}{=} \PY{n}{BinaryTree}\PY{p}{(}\PY{n}{root}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{先序遍历}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bt}\PY{o}{.}\PY{n}{preOrder}\PY{p}{(}\PY{n}{bt}\PY{o}{.}\PY{n}{root}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中序遍历}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bt}\PY{o}{.}\PY{n}{inOrder}\PY{p}{(}\PY{n}{bt}\PY{o}{.}\PY{n}{root}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{后序遍历}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bt}\PY{o}{.}\PY{n}{postOrder}\PY{p}{(}\PY{n}{bt}\PY{o}{.}\PY{n}{root}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{层次遍历}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{bt}\PY{o}{.}\PY{n}{lookup}\PY{p}{(}\PY{n}{bt}\PY{o}{.}\PY{n}{root}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+先序遍历
+A
+B
+D
+E
+C
+F
+中序遍历
+D
+B
+E
+A
+F
+C
+后序遍历
+D
+E
+B
+F
+C
+A
+层次遍历
+[<\_\_main\_\_.BinaryTreeNode object at 0x10ffee400>]
+A
+B
+C
+D
+E
+F
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
